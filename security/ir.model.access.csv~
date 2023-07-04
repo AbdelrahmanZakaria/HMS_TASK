@@ -1,7 +1,0 @@
-id	name	model_id:id	group_id:id	perm_read	perm_write	perm_create	perm_unlink
-task_normal_patient_group	task_normal_patient_group	model_task_patient	task_normal_group	1	0	0	0
-task_normal_doctor_group	task_normal_doctor_group	model_task_doctor	task_normal_group	1	0	0	0
-task_normal_departement_group	task_normal_departement_group	model_task_departement	task_normal_group	1	0	0	0
-task_manager_patient_group	task_manager_patient_group	model_task_patient	task_manager_group	1	1	1	1
-task_manager_doctor_group	task_manager_doctor_group	model_task_doctor	task_manager_group	1	1	1	1
-task_manager_departement_group	task_manager_departement_group	model_task_departement	task_manager_group	1	1	1	1
