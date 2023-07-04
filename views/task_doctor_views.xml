@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="doctor_action" model="ir.actions.act_window">
+            <field name="name">Doctor</field>
+            <field name="res_model">task.doctor</field>
+        </record>
+
+        <record id="doctor_form_view" model="ir.ui.view">
+            <field name="name">Doctor Form View</field>
+            <field name="model">task.doctor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Doctor_Info">
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="image"/>
+                        </group>
+                        <notebook>
+                            <page string="patients">
+                                <field name="patients_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="doctor_tree_view" model="ir.ui.view">
+            <field name="name">Doctor Tree View</field>
+            <field name="model">task.doctor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="image"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="doctor_menu_item" name="Doctor" parent="patient_menu_item" action="doctor_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <record id="departement_action" model="ir.actions.act_window">
+            <field name="name">Departement</field>
+            <field name="res_model">task.departement</field>
+        </record>
+
+        <record id="departement_form_view" model="ir.ui.view">
+            <field name="name">Departement form View</field>
+            <field name="model">task.departement</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Departement_Info">
+                            <field name="name"/>
+                            <field name="capacity"/>
+                            <field name="is_open"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="departement_tree_view" model="ir.ui.view">
+            <field name="name">Departement Tree View</field>
+            <field name="model">task.departement</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="is_open"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="departement_menu_item" name="Departement" parent="patient_menu_item" action="departement_action"/>
+    </data>
+</odoo>

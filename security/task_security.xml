@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+         <record id="task_category" model="ir.module.category">
+            <field name="name">Task Category</field>
+
+        </record>
+         <record id="task_normal_group" model="res.groups">
+            <field name="name">Task Normal</field>
+            <field name="category_id" ref="task_category"/>
+        </record>
+
+        <record id="task_manager_group" model="res.groups">
+            <field name="name">Task Manager</field>
+            <field name="category_id" ref="task_category"/>
+            <field name="implied_ids" eval="[(4,ref('task_normal_group'))]"/>
+        </record>
+    </data>
+</odoo>

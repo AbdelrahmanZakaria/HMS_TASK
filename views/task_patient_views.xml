@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+
+        <record id="patient_action" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="res_model">task.patient</field>
+        </record>
+
+        <record id="patient_form_view" model="ir.ui.view">
+            <field name="name">Patient Form View</field>
+            <field name="model">task.patient</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <header>
+                        <button string="Set Undetermined" type="object" name="ChangeState"
+                                attrs="{'invisible':[('state','!=','none')]}"/>
+                        <button string="Set Fair" type="object" name="ChangeState" states="undetermined"/>
+                        <button string="Set Serious" type="object" name="SetSerious" states="fair"/>
+                        <button string="Set Good" type="object" name="SetGood" states="fair"/>
+                        <button string="Back To Default" type="object" name="ChangeState" states="serious,good"/>
+                        <field name="state" widget="statusbar" statusbar_visible="none,undetermined,fair,serious,good"/>
+                    </header>
+                    <sheet>
+                        <group>
+
+                            <group string="Patient_Info">
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="email"/>
+                            </group>
+
+                            <group string="Other_Info">
+                                <field name="cr_ratio" attrs="{'required':[('pcr','=',True)]}"/>
+                                <field name="blood_type"/>
+                                <field name="pcr"/>
+                                <field name="image"/>
+                                <field name="Address"/>
+                                <field name="departement_id" domain="[('is_open','=',True)]"/>
+                                <field name="departement_capacity"/>
+                                <field name="state"/>
+                            </group>
+
+                            <notebook>
+                                <page string="History">
+                                    <field name="history" attrs="{'invisible':[('age','&lt;=',50)]}"/>
+                                </page>
+
+                                <page string="Log History">
+                                    <group>
+                                        <field name="patient_history_ids">
+                                            <tree>
+                                                <field name="create_uid"/>
+                                                <field name="create_date"/>
+                                                <field name="write_uid"/>
+                                                <field name="write_date"/>
+                                                <field name="description"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page string="Doctors">
+                                    <field name="doctors_ids" widget="many2many_tags"
+                                           attrs="{'readonly':[('departement_id','=',False)]}"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="patient_tree_view" model="ir.ui.view">
+            <field name="name">Patient Tree View</field>
+            <field name="model">task.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="age"/>
+                    <field name="pcr"/>
+                </tree>
+            </field>
+        </record>
+        <record id="patient_customer_inheritance" model="ir.ui.view">
+            <field name="name">Patient Customers Tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <field name="website"/>
+                </field>
+            </field>
+        </record>
+
+        <record id='patient_customers_inherit' model="ir.ui.view">
+            <field name="name">Patient Customers Inheritense</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="industry_id" position="after">
+                    <field name="related_patient_id"/>
+                </field>
+                <field name="vat" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="patient_menu_item" name="HMS"/>
+        <menuitem id="patient_menu" name="Patient" parent="patient_menu_item" action="patient_action"/>
+    </data>
+</odoo>
